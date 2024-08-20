@@ -1,6 +1,6 @@
 {
   "name": "classifying-classic",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -10,15 +10,22 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.635.0",
     "@prisma/client": "5.18.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
     "next": "14.2.5",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "vitest-mock-extended": "^2.0.0"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "aws-sdk-client-mock": "^4.0.1",
+    "cypress": "^13.13.3",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",
