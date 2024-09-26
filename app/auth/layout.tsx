@@ -1,7 +1,11 @@
-import React from "react";
+import React from 'react'
 
 export default function Layout({
-  children,
+    children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return <>{children}</>;
+    return (
+        <div className="w-full h-screen grid place-content-center">
+            {children}
+        </div>
+    )
 }
