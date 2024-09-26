@@ -10,7 +10,7 @@ import { loginAction } from "./login";
 @param {string} username - A username string
 @param {string} password - A username string
 **/
-export default async function register(username: string, password: string) {
+export default async function register(username: string, password: string): Promise<void> {
   try {
     // 1. Check if username is taken
     if (await userExists(username)) {
