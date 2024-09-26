@@ -14,7 +14,41 @@ datasource db {
 }
 
 model User {
-  id       Int    @unique @default(autoincrement())
-  username String @unique
-  password String
+  id          Int          @unique @default(autoincrement())
+  username    String       @unique
+  password    String
+  midiResults MidiResult[]
+  wavResults  WavResult[]
+}
+
+model MidiResult {
+  id                 Int     @id @default(autoincrement())
+  filename           String  @unique
+  classifiedComposer String
+  classifiedGenre    String
+  chords             Chord[]
+  User               User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             Int?
+
+  @@map("MidiResult")
+}
+
+model Chord {
+  id           Int         @id @default(autoincrement())
+  name         String
+  time         Int
+  notes        String[]
+  root         String
+  MidiResult   MidiResult? @relation(fields: [midiResultId], references: [id], onDelete: Cascade)
+  midiResultId Int?
+}
+
+model WavResult {
+  id                 Int     @id @default(autoincrement())
+  filename           String  @unique
+  classifiedComposer String
+  classifiedGenre    String
+  rms                Float[]
+  User               User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             Int?
 }
