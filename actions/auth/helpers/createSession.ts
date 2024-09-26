@@ -9,7 +9,7 @@ import { cookies } from "next/headers";
  */
 export async function createSession(userId: number): Promise<void> {
   console.log("created session");
-  const session = generateToken(userId);
+  const session = await generateToken(userId);
 
   cookies().set("session", session, {
     httpOnly: true,

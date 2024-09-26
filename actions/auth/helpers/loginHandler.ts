@@ -15,10 +15,8 @@ export const loginHandler = async (username: string, password: string) => {
       createSession(user!.id);
       return true;
     }
-
-    console.log(username);
   } catch (error) {
-    return false;
     console.error("Login not succesful: ", error);
+    return false;
   }
 };

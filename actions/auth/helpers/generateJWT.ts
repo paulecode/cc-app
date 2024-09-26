@@ -1,3 +1,4 @@
+import * as jose from "jose";
 import { ENV } from "@/lib/env";
 import jwt from "jsonwebtoken";
 
@@ -7,8 +8,16 @@ import jwt from "jsonwebtoken";
  * in this project the userId
  * @returns {string} the signed JWT
  */
-export function generateToken(payload: number): string {
-  const token = jwt.sign({ sub: payload }, ENV.JWT_SECRET);
+export async function generateToken(payload: number) {
+  // const token = jwt.sign({ sub: payload }, ENV.JWT_SECRET);
+  const key = new TextEncoder().encode(ENV.JWT_SECRET);
+  const joseToken = await new jose.SignJWT()
+    .setProtectedHeader({ alg: "HS256" })
+    .setSubject(`${payload}`)
+    .setIssuedAt()
+    .sign(key);
 
-  return token;
+  console.log("token");
+  console.log(joseToken);
+  return joseToken;
 }

@@ -1,5 +1,5 @@
+import * as jose from "jose";
 import { ENV } from "@/lib/env";
-import jwt from "jsonwebtoken";
 import { jwtSchema } from "./validation";
 
 /**
@@ -9,12 +9,14 @@ import { jwtSchema } from "./validation";
  * @returns {number} userId if signature is vaild
  * @throws {Error} Throws error if token signature is invalid or has incorrect structure.
  */
-export function decodeToken(token: string): number {
-  const decodedToken = jwt.verify(token, ENV.JWT_SECRET, {
-    maxAge: "1w",
+export async function decodeToken(token: string): Promise<number> {
+  const secret = new TextEncoder().encode(ENV.JWT_SECRET);
+  const { payload } = await jose.jwtVerify(token, secret, {
+    maxTokenAge: "1d",
   });
 
-  const result = jwtSchema.safeParse(decodedToken);
+  console.log(payload);
+  const result = jwtSchema.safeParse(payload);
 
   if (!result.success) {
     console.error("Zod validation failed: ", result.error.format);
