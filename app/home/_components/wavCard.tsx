@@ -11,7 +11,7 @@ export async function WavCard({ filename }: { filename: string }) {
 
     return (
         <div className="w-full h-full flex flex-col">
-            <FileHeader file={file} filetype="midi" />
+            <FileHeader file={file} filetype="wav" />
             <div className="w-full min-h-0 grow">
                 <RMSChart data={file.rms} />
             </div>

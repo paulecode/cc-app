@@ -16,6 +16,11 @@ export const FileHeader = ({
     file: WavResult | MidiResult
     filetype: 'wav' | 'midi'
 }) => {
+    const wavChartOptions = ['RMS', 'Spectrogram', 'Mel-Frequency']
+    const midiChartOptions = ['Notes', 'Mean Velocity', 'Chords']
+
+    const options = filetype === 'wav' ? wavChartOptions : midiChartOptions
+
     return (
         <>
             <div className="w-full flex justify-between">
@@ -44,9 +49,13 @@ export const FileHeader = ({
                             <SelectValue placeholder="Select a view" />
                         </SelectTrigger>
                         <SelectContent>
-                            <SelectItem value="ChordBar">
-                                Chord BarChart
-                            </SelectItem>
+                            {options.map((option) => {
+                                return (
+                                    <SelectItem value={option} key={option}>
+                                        {option}
+                                    </SelectItem>
+                                )
+                            })}
                         </SelectContent>
                     </Select>
                 </div>
