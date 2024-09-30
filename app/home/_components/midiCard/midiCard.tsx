@@ -1,7 +1,7 @@
-import { getMidiResult } from '@/actions/getResults/getClassificationResult'
 import { BarChart } from '@/components/charts/BarChart'
 import { graphicsProvider } from '@/components/charts/providers'
 import { FileHeader } from '../fileHeader'
+import { getMidiResult } from '@/actions/getResults/getMidiResult'
 
 export async function MidiCard({ filename }: { filename: string }) {
     const file = await getMidiResult(filename)
