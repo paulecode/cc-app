@@ -23,13 +23,15 @@ model User {
 
 model MidiResult {
   id                 Int     @id @default(autoincrement())
-  filename           String  @unique
+  filename           String
   classifiedComposer String?
   classifiedGenre    String?
   chords             Chord[]
   User               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId             Int
+  processed          Boolean @default(false)
 
+  @@unique([userId, filename])
   @@map("MidiResult")
 }
 
@@ -45,10 +47,13 @@ model Chord {
 
 model WavResult {
   id                 Int     @id @default(autoincrement())
-  filename           String  @unique
+  filename           String
   classifiedComposer String?
   classifiedGenre    String?
   rms                Float[]
   User               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId             Int
+  processed          Boolean @default(false)
+
+  @@unique([userId, filename])
 }
