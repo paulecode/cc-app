@@ -1,9 +1,9 @@
 import { z } from 'zod'
-import { MidiCard } from './_components/midiCard/midiCard'
 import { getAllFiles } from '@/actions/getResults/getAllFiles'
 import { verifySession } from '@/midlewares/verifySession'
 import { redirect } from 'next/navigation'
 import { WavCard } from './_components/wavCard'
+import { MidiCard } from './_components/midiCard'
 
 export default async function Home({
     searchParams,
