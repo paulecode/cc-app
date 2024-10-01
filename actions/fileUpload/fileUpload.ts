@@ -25,7 +25,7 @@ export const handleFileUpload = async (formData: FormData) => {
               ? '/predictWav'
               : ''
 
-    const result = await fetch(baseUrl + urlSuffix, {
+    const response = await fetch(baseUrl + urlSuffix, {
         method: 'POST',
         body: formData,
         headers: {
@@ -36,15 +36,15 @@ export const handleFileUpload = async (formData: FormData) => {
         },
     })
 
-    const response = await result.json()
-    console.log(response)
+    if (!response.ok) {
+        return
+    }
 
     const classificationResult = {
         meta: {
             filename,
             filetype,
         },
-        ...response,
     }
 
     if (filetype === 'audio/midi') {

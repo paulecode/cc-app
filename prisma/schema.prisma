@@ -26,6 +26,9 @@ model MidiResult {
   filename           String
   classifiedComposer String?
   classifiedGenre    String?
+  notes              Int[]
+  timestamps         Int[]
+  velocity           Int[]
   chords             Chord[]
   User               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId             Int
