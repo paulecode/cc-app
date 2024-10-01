@@ -1,6 +1,6 @@
 'use client'
+import { Button } from '@/components/ui/button'
 import { ChevronRightIcon } from '@radix-ui/react-icons'
-import { Button } from '../ui/button'
 import { useRouter } from 'next/navigation'
 
 export const PieceListEntry = ({

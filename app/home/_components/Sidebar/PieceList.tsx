@@ -5,8 +5,8 @@ import { PieceListEntry } from './PieceListEntry'
 export const PieceList = ({ fileList }: { fileList: string[] | undefined }) => {
     const currentSelection = useSearchParams().get('file')
 
-    if (!fileList) {
-        return <div>No pieces uploaded yet</div>
+    if (!fileList || fileList.length === 0) {
+        return <div className="flex-grow">No pieces uploaded yet</div>
     }
 
     return (

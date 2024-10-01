@@ -18,7 +18,6 @@ const MidiResultSchema = z.object({
         filename: z.string(),
         filetype: z.string(),
     }),
-    chords: z.array(ChordSchema),
 })
 
 const WavResultSchema = z.object({
@@ -26,7 +25,6 @@ const WavResultSchema = z.object({
         filename: z.string(),
         filetype: z.string(),
     }),
-    rms: z.array(z.number()),
 })
 
 export { WavResultSchema, MidiResultSchema }

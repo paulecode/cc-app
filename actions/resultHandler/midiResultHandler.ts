@@ -21,27 +21,18 @@ export const midiResultHandler = async (results: ClassificationResultType) => {
     }
 
     // Todo clean up
-    const { chords } = data.data
 
     const filename = data.data.meta.filename
-    const filetype = data.data.meta.filetype
-
-    console.log(chords)
-
-    const chordsData: Prisma.ChordCreateManyMidiResultInput[] = []
 
     try {
         const classificationResult = await prisma.midiResult.create({
             data: {
                 filename,
                 userId,
-                classifiedGenre: 'test',
-                classifiedComposer: 'test',
-                chords: { createMany: { data: chords } },
+                processed: false,
             },
         })
 
-        console.log(classificationResult)
         return classificationResult
     } catch (error) {
         console.error('Error creating classification result', error)

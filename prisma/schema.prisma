@@ -23,32 +23,40 @@ model User {
 
 model MidiResult {
   id                 Int     @id @default(autoincrement())
-  filename           String  @unique
-  classifiedComposer String
-  classifiedGenre    String
+  filename           String
+  classifiedComposer String?
+  classifiedGenre    String?
+  notes              Int[]
+  timestamps         Int[]
+  velocity           Int[]
   chords             Chord[]
-  User               User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId             Int?
+  User               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             Int
+  processed          Boolean @default(false)
 
+  @@unique([userId, filename])
   @@map("MidiResult")
 }
 
 model Chord {
-  id           Int         @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   name         String
   time         Int
   notes        String[]
   root         String
-  MidiResult   MidiResult? @relation(fields: [midiResultId], references: [id], onDelete: Cascade)
-  midiResultId Int?
+  MidiResult   MidiResult @relation(fields: [midiResultId], references: [id], onDelete: Cascade)
+  midiResultId Int
 }
 
 model WavResult {
   id                 Int     @id @default(autoincrement())
-  filename           String  @unique
-  classifiedComposer String
-  classifiedGenre    String
+  filename           String
+  classifiedComposer String?
+  classifiedGenre    String?
   rms                Float[]
-  User               User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId             Int?
+  User               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             Int
+  processed          Boolean @default(false)
+
+  @@unique([userId, filename])
 }

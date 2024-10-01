@@ -2,7 +2,6 @@
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
     FormLabel,
@@ -15,7 +14,6 @@ import { loginFormSchema } from '../validation'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { loginAction } from '@/actions/auth/login'
-import { useActionState } from 'react'
 import { useFormState } from 'react-dom'
 
 export function LoginForm() {
