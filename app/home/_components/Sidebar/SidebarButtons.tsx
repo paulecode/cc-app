@@ -2,10 +2,20 @@
 
 import { Button } from '@/components/ui/button'
 
-export const LogOutButton = ({ logout }: { logout: any }) => {
+const LogOutButton = ({ logout }: { logout: any }) => {
     return (
         <Button variant="outline" onClick={() => logout()}>
             Log out
         </Button>
     )
 }
+
+const DeleteButton = ({ deleteAccount }: { deleteAccount: any }) => {
+    return (
+        <Button variant="destructive" onClick={() => deleteAccount()}>
+            Delete Account
+        </Button>
+    )
+}
+
+export { LogOutButton, DeleteButton }

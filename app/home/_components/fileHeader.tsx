@@ -1,3 +1,4 @@
+import { deleteResult } from '@/actions/getResults/deleteResult'
 import { Button } from '@/components/ui/button'
 import {
     Select,
@@ -8,6 +9,7 @@ import {
 } from '@/components/ui/select'
 import { MidiResult, WavResult } from '@prisma/client'
 import { TrashIcon } from '@radix-ui/react-icons'
+import { DeleteResultButton } from './deleteResultButton'
 
 export const FileHeader = ({
     file,
@@ -41,9 +43,7 @@ export const FileHeader = ({
                     </div>
                 </div>
                 <div className="flex flex-col justify-between items-end">
-                    <Button variant="destructive" size="icon">
-                        <TrashIcon />
-                    </Button>
+                    <DeleteResultButton filename={file.filename} />
                     <Select>
                         <SelectTrigger>
                             <SelectValue placeholder="Select a view" />

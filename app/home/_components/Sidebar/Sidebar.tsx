@@ -3,8 +3,7 @@ import { redirect } from 'next/navigation'
 import { verifySession } from '@/midlewares/verifySession'
 import { getAllFiles } from '@/actions/getResults/getAllFiles'
 import { UploadForm } from '@/app/home/_components/uploadForm'
-import { LogOutButton } from './SidebarButtons'
-import { Button } from '@/components/ui/button'
+import { DeleteButton, LogOutButton } from './SidebarButtons'
 import { cookies } from 'next/headers'
 
 export default async function Sidebar() {
@@ -30,6 +29,10 @@ export default async function Sidebar() {
         redirect('/')
     }
 
+    async function handleDelete() {
+        'use server'
+    }
+
     return (
         <div className="border-r border-gray-200 gap-2 shadow-xl p-4 flex flex-col justify-between w-96">
             <h2>Pieces</h2>
@@ -37,7 +40,7 @@ export default async function Sidebar() {
             <UploadForm />
             <div className="grid grid-cols-2 gap-2">
                 <LogOutButton logout={logout} />
-                <Button variant="destructive">Delete Account</Button>
+                <DeleteButton deleteAccount={handleDelete} />
             </div>
         </div>
     )
