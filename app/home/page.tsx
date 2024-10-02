@@ -29,7 +29,6 @@ export default async function Home({
 
     const userUploads = await getUserUploads()
 
-    //test this
     if (!userUploads) {
         return (
             <div className="w-full grid place-content-center">

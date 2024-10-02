@@ -33,7 +33,7 @@ export async function MidiCard({
 
     return (
         <div className="w-full h-full flex flex-col">
-            <FileHeader file={file} filetype="midi" />
+            <FileHeader file={file} activeChart={activeChart} filetype="midi" />
             <ChartWrapper activeChart={activeChart} chartName="Chords">
                 <BarChart
                     data={chordData.map((chord) => {
@@ -60,7 +60,7 @@ export const ChartWrapper: React.FC<{
         'w-full',
         'min-h-0',
         'grow',
-        activeChart == chartName ? '' : 'hidden'
+        activeChart == chartName ? 'visible' : 'hidden'
     )
     return <div className={classNames}>{children}</div>
 }

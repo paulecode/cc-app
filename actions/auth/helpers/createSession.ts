@@ -1,6 +1,6 @@
-"use server";
-import { generateToken } from "@/actions/auth/helpers/generateJWT";
-import { cookies } from "next/headers";
+'use server'
+import { generateToken } from '@/actions/auth/helpers/generateJWT'
+import { cookies } from 'next/headers'
 
 /**
  * Generates a token and stores it in httpOnly cookie
@@ -8,13 +8,12 @@ import { cookies } from "next/headers";
  * @returns {void} `void`
  */
 export async function createSession(userId: number): Promise<void> {
-  console.log("created session");
-  const session = await generateToken(userId);
+    const session = await generateToken(userId)
 
-  cookies().set("session", session, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "lax",
-    path: "/",
-  });
+    cookies().set('session', session, {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'lax',
+        path: '/',
+    })
 }

@@ -13,18 +13,21 @@ import { useRouter } from 'next/navigation'
 export const FileHeader = ({
     file,
     filetype,
+    activeChart,
 }: {
     file: WavResult | MidiResult
     filetype: 'wav' | 'midi'
+    activeChart?: string | undefined
 }) => {
     const router = useRouter()
-    const wavChartOptions = ['RMS', 'Spectrogram', 'Mel-Frequency']
-    const midiChartOptions = ['Notes', 'Mean Velocity', 'Chords']
+    const wavChartOptions = ['RMS']
+    const midiChartOptions = ['Notes', 'Chords']
 
     const options = filetype === 'wav' ? wavChartOptions : midiChartOptions
 
     const handleChartChange = (newChart: string) => {
         router.push(`/home?file=${file.filename}&chart=${newChart}`)
+        window.location.reload()
     }
     return (
         <>
@@ -48,7 +51,7 @@ export const FileHeader = ({
                 <div className="flex flex-col justify-between items-end">
                     <DeleteResultButton filename={file.filename} />
                     <Select
-                        defaultValue={options[0]}
+                        defaultValue={activeChart || options[0]}
                         onValueChange={handleChartChange}
                     >
                         <SelectTrigger>
