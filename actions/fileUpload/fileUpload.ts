@@ -53,7 +53,5 @@ export const handleFileUpload = async (formData: FormData) => {
         await wavResultHandler(classificationResult)
     }
 
-    // redirect(`${filetype}?=${filename}`);
-
     redirect(`/home?file=${filename}`)
 }

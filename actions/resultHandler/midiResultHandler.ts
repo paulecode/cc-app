@@ -20,8 +20,6 @@ export const midiResultHandler = async (results: ClassificationResultType) => {
         return null
     }
 
-    // Todo clean up
-
     const filename = data.data.meta.filename
 
     try {
