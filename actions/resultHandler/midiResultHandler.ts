@@ -5,6 +5,12 @@ import { Prisma } from '@prisma/client'
 import { z } from 'zod'
 
 type ClassificationResultType = z.infer<typeof MidiResultSchema>
+/**
+ * Handles the creation of a MIDI classification result in the database.
+ *
+ * @param results - The classification result data to be stored.
+ * @returns A promise that resolves to the created classification result or null if an error occurs.
+ */
 export const midiResultHandler = async (results: ClassificationResultType) => {
     const userId = await verifySession()
 

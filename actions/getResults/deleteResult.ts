@@ -3,6 +3,12 @@ import prisma from '@/lib/prisma'
 import { verifySession } from '@/midlewares/verifySession'
 import { redirect } from 'next/navigation'
 
+/**
+ * Deletes a result file from the database.
+ *
+ * @param filename - The name of the file to be deleted.
+ * @throws Will throw an error if the session is invalid or the file cannot be found.
+ */
 export const deleteResult = async (filename: string) => {
     const userId = await verifySession()
 
