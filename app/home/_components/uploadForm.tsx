@@ -23,11 +23,8 @@ export const UploadForm: React.FC = () => {
     const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             setFile(e.target.files[0])
-            console.log(e.target.files[0].type)
         }
     }
-
-    console.log(trim)
 
     return (
         <Dialog>

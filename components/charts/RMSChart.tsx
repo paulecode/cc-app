@@ -91,7 +91,7 @@ export const RMSChart = ({ data }: { data: number[] }) => {
             .datum(data)
             .attr('class', 'line')
             .attr('fill', 'none')
-            .attr('stroke', '#282F3C')
+            .attr('stroke', '#69b3a2') //#69b3a2 #282F3C
             .attr('stroke-width', 2)
             .attr('d', lineGenerator)
 
