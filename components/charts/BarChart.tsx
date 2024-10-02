@@ -1,7 +1,6 @@
 'use client'
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
-import debounce from 'lodash/debounce'
 import { useResize } from './useResize'
 
 interface DataItem {
