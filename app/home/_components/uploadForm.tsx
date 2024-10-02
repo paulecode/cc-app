@@ -52,6 +52,7 @@ export const UploadForm: React.FC = () => {
                                 <Checkbox
                                     id="trimCheckbox"
                                     onCheckedChange={() => setTrim(!trim)}
+                                    disabled
                                 />
                                 <Label htmlFor="trimCheckbox">Trim file</Label>
                             </div>
