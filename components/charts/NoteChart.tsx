@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useRef, useMemo } from 'react'
+import React, { useEffect, useRef, useMemo, useCallback } from 'react'
 import * as d3 from 'd3'
 import { useResize } from './useResize'
 
@@ -27,6 +27,36 @@ const PianoNotesScatterplot: React.FC<PianoNotesScatterplotProps> = ({
             velocity: midiData.velocity[index],
         }))
     }, [midiData])
+
+    const brushed = useCallback(
+        (
+            event: d3.D3BrushEvent<unknown>,
+            x: d3.ScaleLinear<number, number>,
+            svg: d3.Selection<SVGGElement, unknown, null, undefined>,
+            data: typeof midiData.notes
+        ) => {
+            const extent = event.selection as [number, number] | null
+
+            if (!extent) {
+                x.domain(
+                    d3.extent(data, (d) => d.timestamp) as [number, number]
+                )
+            } else {
+                x.domain([x.invert(extent[0]), x.invert(extent[1])])
+                svg.select<SVGGElement>('.brush').call(d3.brushX().move, null)
+            }
+
+            svg.select<SVGGElement>('.x-axis')
+                .transition()
+                .duration(1000)
+                .call(d3.axisBottom(x))
+            svg.selectAll<SVGCircleElement, (typeof data)[number]>('circle')
+                .transition()
+                .duration(1000)
+                .attr('cx', (d) => x(d.timestamp))
+        },
+        [midiData]
+    )
 
     useEffect(() => {
         if (!size || !data) return
@@ -73,7 +103,7 @@ const PianoNotesScatterplot: React.FC<PianoNotesScatterplotProps> = ({
             svg.append('g').call(d3.axisLeft(y))
 
             svg.append('g')
-                .selectAll('dot')
+                .selectAll('circle')
                 .data(data)
                 .enter()
                 .append('circle')
@@ -89,31 +119,9 @@ const PianoNotesScatterplot: React.FC<PianoNotesScatterplotProps> = ({
                     [0, 0],
                     [width, height],
                 ])
-                .on('end', brushed)
+                .on('end', (event) => brushed(event, x, svg, data))
 
             svg.append('g').attr('class', 'brush').call(brush)
-
-            function brushed(event: d3.D3BrushEvent<unknown>) {
-                const extent = event.selection as [number, number] | null
-
-                if (!extent) {
-                    x.domain(
-                        d3.extent(data, (d) => d.timestamp) as [number, number]
-                    )
-                } else {
-                    x.domain([x.invert(extent[0]), x.invert(extent[1])])
-                    svg.select<SVGGElement>('.brush').call(brush.move, null)
-                }
-
-                svg.select<SVGGElement>('.x-axis')
-                    .transition()
-                    .duration(1000)
-                    .call(d3.axisBottom(x))
-                svg.selectAll<SVGCircleElement, (typeof data)[number]>('circle')
-                    .transition()
-                    .duration(1000)
-                    .attr('cx', (d) => x(d.timestamp))
-            }
 
             svg.append('text')
                 .attr('text-anchor', 'end')
@@ -128,7 +136,7 @@ const PianoNotesScatterplot: React.FC<PianoNotesScatterplotProps> = ({
                 .attr('x', -margin.top)
                 .text('Note')
         }
-    }, [data, size])
+    }, [data, size, brushed])
 
     return <div ref={rootRef} style={{ width: '100%', height: '100%' }} />
 }
