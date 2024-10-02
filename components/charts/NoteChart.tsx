@@ -124,8 +124,13 @@ const NotesScatterplot: React.FC<NotesScatterplotProps> = ({ midiData }) => {
         (
             event: d3.D3BrushEvent<unknown>,
             x: d3.ScaleLinear<number, number>,
-            svg: d3.Selection<SVGGElement, unknown, null, undefined>,
-            data: typeof midiData.notes
+            svg: d3.Selection<SVGSVGElement, unknown, null, undefined>,
+            data: {
+                note: number
+                timestamp: number
+                velocity: number
+                noteName: string
+            }[]
         ) => {
             const extent = event.selection as [number, number] | null
 
@@ -147,7 +152,7 @@ const NotesScatterplot: React.FC<NotesScatterplotProps> = ({ midiData }) => {
                 .duration(1000)
                 .attr('cx', (d) => x(d.timestamp))
         },
-        [midiData]
+        []
     )
 
     useEffect(() => {
