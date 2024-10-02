@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useEffect, useRef, useMemo, useCallback } from 'react'
 import * as d3 from 'd3'
 import { useResize } from './useResize'
@@ -104,13 +103,11 @@ interface MidiData {
     velocity: number[]
 }
 
-interface PianoNotesScatterplotProps {
+interface NotesScatterplotProps {
     midiData: MidiData
 }
 
-const PianoNotesScatterplot: React.FC<PianoNotesScatterplotProps> = ({
-    midiData,
-}) => {
+const NotesScatterplot: React.FC<NotesScatterplotProps> = ({ midiData }) => {
     const rootRef = useRef<HTMLDivElement>(null)
     const size = useResize(rootRef)
 
@@ -172,8 +169,18 @@ const PianoNotesScatterplot: React.FC<PianoNotesScatterplotProps> = ({
                 .append('svg')
                 .attr('width', size.width)
                 .attr('height', size.height)
+
+            svg.append('defs')
+                .append('clipPath')
+                .attr('id', 'clip')
+                .append('rect')
+                .attr('width', width)
+                .attr('height', height)
+
+            const chartArea = svg
                 .append('g')
                 .attr('transform', `translate(${margin.left},${margin.top})`)
+                .attr('clip-path', 'url(#clip)')
 
             const x = d3
                 .scaleLinear<number>()
@@ -202,7 +209,10 @@ const PianoNotesScatterplot: React.FC<PianoNotesScatterplotProps> = ({
 
             svg.append('g')
                 .attr('class', 'x-axis')
-                .attr('transform', `translate(0,${height})`)
+                .attr(
+                    'transform',
+                    `translate(${margin.left},${height + margin.top})`
+                )
                 .call(
                     d3.axisBottom(x).tickFormat((d) => {
                         const date = new Date(d as number)
@@ -210,14 +220,18 @@ const PianoNotesScatterplot: React.FC<PianoNotesScatterplotProps> = ({
                     })
                 )
 
-            svg.append('g').call(
-                d3
-                    .axisLeft(y)
-                    .tickValues(cNotes)
-                    .tickFormat((d) => getNoteNameFromMidiNumber(d as number))
-            )
-
             svg.append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`)
+                .call(
+                    d3
+                        .axisLeft(y)
+                        .tickValues(cNotes)
+                        .tickFormat((d) =>
+                            getNoteNameFromMidiNumber(d as number)
+                        )
+                )
+
+            chartArea
                 .selectAll('circle')
                 .data(data)
                 .enter()
@@ -249,8 +263,7 @@ const PianoNotesScatterplot: React.FC<PianoNotesScatterplotProps> = ({
                 ])
                 .on('end', (event) => brushed(event, x, svg, data))
 
-            // Append the brush below the circles so it doesn't interfere with tooltips
-            svg.append('g').attr('class', 'brush').call(brush).lower() // Make sure brush layer is below the circles
+            chartArea.append('g').attr('class', 'brush').call(brush).lower()
 
             svg.append('text')
                 .attr('text-anchor', 'end')
@@ -270,4 +283,4 @@ const PianoNotesScatterplot: React.FC<PianoNotesScatterplotProps> = ({
     return <div ref={rootRef} style={{ width: '100%', height: '100%' }} />
 }
 
-export default PianoNotesScatterplot
+export default NotesScatterplot
