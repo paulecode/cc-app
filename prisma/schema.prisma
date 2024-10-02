@@ -54,6 +54,7 @@ model WavResult {
   classifiedComposer String?
   classifiedGenre    String?
   rms                Float[]
+  spectogram         Float[]
   User               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId             Int
   processed          Boolean @default(false)
