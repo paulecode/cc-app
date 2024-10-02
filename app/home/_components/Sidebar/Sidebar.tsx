@@ -5,6 +5,7 @@ import { getAllFiles } from '@/actions/getResults/getAllFiles'
 import { UploadForm } from '@/app/home/_components/uploadForm'
 import { DeleteButton, LogOutButton } from './SidebarButtons'
 import { cookies } from 'next/headers'
+import { deleteAccount } from '@/actions/auth/delete'
 
 export default async function Sidebar() {
     const userId = await verifySession()
@@ -31,6 +32,10 @@ export default async function Sidebar() {
 
     async function handleDelete() {
         'use server'
+
+        await deleteAccount()
+
+        await logout()
     }
 
     return (
