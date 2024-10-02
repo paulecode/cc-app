@@ -1,5 +1,4 @@
 const requiredKeys = ['POSTGRES_URL', 'JWT_SECRET', 'FASTAPI_URL'] as const
-// const requiredKeys = ["POSTGRES_URL", "FASTAPI_URL", "JWT_SECRET"] as const;
 
 interface envInterface {
     POSTGRES_URL: string
