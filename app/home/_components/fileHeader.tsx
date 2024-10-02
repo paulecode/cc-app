@@ -18,8 +18,8 @@ export const FileHeader = ({
     filetype: 'wav' | 'midi'
 }) => {
     const router = useRouter()
-    const wavChartOptions = ['RMS', 'Spectrogram', 'Mel-Frequency']
-    const midiChartOptions = ['Notes', 'Mean Velocity', 'Chords']
+    const wavChartOptions = ['RMS']
+    const midiChartOptions = ['Notes', 'Chords']
 
     const options = filetype === 'wav' ? wavChartOptions : midiChartOptions
 
