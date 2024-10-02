@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
 
     const { genre, composer } = data.classification
 
-    const { rms } = data.visualization
+    const { rms, spectogram } = data.visualization
 
     // find piece
 
@@ -64,6 +64,7 @@ export async function POST(req: NextRequest) {
             classifiedGenre: genre,
             classifiedComposer: composer,
             rms,
+            spectogram,
         },
     })
 
