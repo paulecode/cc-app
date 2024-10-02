@@ -1,34 +1,7 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
 import * as d3 from 'd3'
-import debounce from 'lodash/debounce'
-
-function useResize(ref: React.RefObject<HTMLDivElement>) {
-    const [state, setState] = useState<
-        { width: number; height: number } | undefined
-    >()
-
-    useEffect(() => {
-        const getSize = debounce(() => {
-            if (!ref || !ref.current) {
-                return
-            }
-
-            const width = ref.current.offsetWidth
-            const height = ref.current.offsetHeight
-            setState({
-                width,
-                height,
-            })
-        }, 100)
-
-        window.addEventListener('resize', getSize)
-        getSize()
-        return () => window.removeEventListener('resize', getSize)
-    }, [ref])
-
-    return state
-}
+import { useResize } from './useResize'
 
 export const RMSChart = ({ data }: { data: number[] }) => {
     const rootRef = useRef<HTMLDivElement>(null)
