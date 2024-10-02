@@ -16,9 +16,16 @@ export default async function Home({
             z.array(z.string()).transform((x) => x[0]),
             z.undefined(),
         ]),
+        chart: z.union([
+            z.string(),
+            z.array(z.string()).transform((x) => x[0]),
+            z.undefined(),
+        ]),
     })
 
     const filename = searchParamsSchema.parse(searchParams).file
+
+    const chart = searchParamsSchema.parse(searchParams).chart
 
     const userUploads = await getUserUploads()
 
@@ -41,7 +48,7 @@ export default async function Home({
 
     return (
         <div className="p-4 w-full h-full">
-            <MidiCard filename={filename} />
+            <MidiCard filename={filename} activeChart={chart} />
             <WavCard filename={filename} />
         </div>
     )
