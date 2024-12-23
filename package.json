@@ -11,7 +11,7 @@
         "storybook": "storybook dev -p 6006",
         "build-storybook": "storybook build",
         "postinstall": "prisma generate",
-        "db:create": "docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=password -d postgres; yarn prisma migrate dev --force",
+        "db:create": "docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=password -d postgres; yarn prisma migrate dev",
         "db:stop": "docker stop postgres",
         "db:rm": "docker rm postgres",
         "testdb:create": "docker run --name test_postgres -p 5432:5432 -e POSTGRES_PASSWORD=password -d postgres; yarn prisma migrate reset --force",
