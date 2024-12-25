@@ -1,6 +1,6 @@
 import { PieceList } from './PieceList'
 import { redirect } from 'next/navigation'
-import { verifySession } from '@/midlewares/verifySession'
+import { verifySession } from '@/middlewares/verifySession'
 import { getAllFiles } from '@/actions/getResults/getAllFiles'
 import { UploadForm } from '@/app/home/_components/uploadForm'
 import { DeleteButton, LogOutButton } from './SidebarButtons'

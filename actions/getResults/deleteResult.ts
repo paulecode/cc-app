@@ -1,6 +1,6 @@
 'use server'
 import prisma from '@/lib/prisma'
-import { verifySession } from '@/midlewares/verifySession'
+import { verifySession } from '@/middlewares/verifySession'
 import { redirect } from 'next/navigation'
 
 /**

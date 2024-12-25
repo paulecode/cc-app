@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { ENV } from '@/lib/env'
 import { midiResultHandler } from '../resultHandler/midiResultHandler'
 import { wavResultHandler } from '../resultHandler/wavResultHandler'
-import { verifySession } from '@/midlewares/verifySession'
+import { verifySession } from '@/middlewares/verifySession'
 
 export const handleFileUpload = async (formData: FormData) => {
     'use server'
@@ -22,8 +22,8 @@ export const handleFileUpload = async (formData: FormData) => {
         filetype === 'audio/midi'
             ? '/predictMidi'
             : filetype === 'audio/x-wav'
-              ? '/predictWav'
-              : ''
+                ? '/predictWav'
+                : ''
 
     const response = await fetch(baseUrl + urlSuffix, {
         method: 'POST',

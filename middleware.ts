@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { verifySession } from './midlewares/verifySession'
+import { verifySession } from './middlewares/verifySession'
 
 export async function middleware(request: NextRequest) {
     if (request.nextUrl.pathname.startsWith('/home')) {

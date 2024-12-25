@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import { getAllFiles } from '@/actions/getResults/getAllFiles'
-import { verifySession } from '@/midlewares/verifySession'
+import { verifySession } from '@/middlewares/verifySession'
 import { redirect } from 'next/navigation'
 import { WavCard } from './_components/wavCard'
 import { MidiCard } from './_components/midiCard'
