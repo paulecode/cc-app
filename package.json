@@ -17,7 +17,7 @@
         "testdb:create": "docker run --name test_postgres -p 5432:5432 -e POSTGRES_PASSWORD=password -d postgres; yarn prisma migrate reset --force",
         "testdb:stop": "docker stop test_postgres",
         "testdb:rm": "docker rm test_postgres",
-        "vercel-build": "prisma generate && prisma migrate deploy && next build",
+        "vercel-build": "prisma generate && prisma migrate deploy && next build"
     },
     "dependencies": {
         "@aws-sdk/client-s3": "^3.635.0",
