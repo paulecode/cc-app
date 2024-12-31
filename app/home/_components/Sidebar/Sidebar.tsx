@@ -11,7 +11,7 @@ export default async function Sidebar() {
     const userId = await verifySession()
 
     if (!userId) {
-        redirect('/login')
+        redirect('/auth')
     }
 
     const wavAndMidiFiles = await getAllFiles(userId)

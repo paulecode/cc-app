@@ -57,7 +57,7 @@ const getUserUploads = async () => {
     const userId = await verifySession()
 
     if (!userId) {
-        redirect('/login')
+        redirect('/auth')
     }
 
     const pieces = await getAllFiles(userId)
