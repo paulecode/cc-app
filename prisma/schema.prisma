@@ -19,6 +19,8 @@ model User {
   password    String
   midiResults MidiResult[]
   wavResults  WavResult[]
+
+  @@index([username])
 }
 
 model MidiResult {
@@ -35,6 +37,7 @@ model MidiResult {
   processed          Boolean @default(false)
 
   @@unique([userId, filename])
+  @@index([userId])
   @@map("MidiResult")
 }
 
@@ -46,6 +49,8 @@ model Chord {
   root         String
   MidiResult   MidiResult @relation(fields: [midiResultId], references: [id], onDelete: Cascade)
   midiResultId Int
+
+  @@index([midiResultId])
 }
 
 model WavResult {
@@ -60,4 +65,5 @@ model WavResult {
   processed          Boolean @default(false)
 
   @@unique([userId, filename])
+  @@index([userId])
 }
