@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
 import { WavResultSchema } from './types'
-import { verifySession } from '@/midlewares/verifySession'
+import { verifySession } from '@/middlewares/verifySession'
 import { z } from 'zod'
 
 type ClassificationResultType = z.infer<typeof WavResultSchema>

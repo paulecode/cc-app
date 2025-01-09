@@ -1,6 +1,6 @@
 'use server'
 import prisma from '@/lib/prisma'
-import { verifySession } from '@/midlewares/verifySession'
+import { verifySession } from '@/middlewares/verifySession'
 
 export const deleteAccount = async () => {
     const userId = await verifySession()

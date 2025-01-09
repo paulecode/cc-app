@@ -1,6 +1,6 @@
 import { PieceList } from './PieceList'
 import { redirect } from 'next/navigation'
-import { verifySession } from '@/midlewares/verifySession'
+import { verifySession } from '@/middlewares/verifySession'
 import { getAllFiles } from '@/actions/getResults/getAllFiles'
 import { UploadForm } from '@/app/home/_components/uploadForm'
 import { DeleteButton, LogOutButton } from './SidebarButtons'
@@ -11,7 +11,7 @@ export default async function Sidebar() {
     const userId = await verifySession()
 
     if (!userId) {
-        redirect('/login')
+        redirect('/auth')
     }
 
     const wavAndMidiFiles = await getAllFiles(userId)

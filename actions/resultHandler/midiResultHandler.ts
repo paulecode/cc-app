@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
 import { MidiResultSchema } from './types'
-import { verifySession } from '@/midlewares/verifySession'
+import { verifySession } from '@/middlewares/verifySession'
 import { Prisma } from '@prisma/client'
 import { z } from 'zod'
 
