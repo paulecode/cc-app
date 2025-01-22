@@ -30,48 +30,46 @@ export function LoginForm() {
     const [state, formAction] = useFormState(loginAction, null)
 
     return (
-        <div>
-            <Form {...form}>
-                <form action={formAction} className="flex flex-col gap-4">
-                    <FormField
-                        name="username"
-                        control={form.control}
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Username</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder="paulecode"
-                                        required
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    <FormField
-                        name="password"
-                        control={form.control}
-                        render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Password</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        placeholder="********"
-                                        type="password"
-                                        required
-                                        {...field}
-                                    />
-                                </FormControl>
-                                <FormMessage />
-                            </FormItem>
-                        )}
-                    />
-                    {state}
-                    <Button type="submit">Submit</Button>
-                </form>
-            </Form>
-        </div>
+        <Form {...form}>
+            <form action={formAction} className="flex flex-col gap-4">
+                <FormField
+                    name="username"
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Username</FormLabel>
+                            <FormControl>
+                                <Input
+                                    placeholder="paulecode"
+                                    required
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    name="password"
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Password</FormLabel>
+                            <FormControl>
+                                <Input
+                                    placeholder="********"
+                                    type="password"
+                                    required
+                                    {...field}
+                                />
+                            </FormControl>
+                            <FormMessage />
+                        </FormItem>
+                    )}
+                />
+                {state}
+                <Button type="submit">Submit</Button>
+            </form>
+        </Form>
     )
 }
