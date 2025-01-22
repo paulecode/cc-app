@@ -22,13 +22,9 @@ export default async function register(
 
         const hashedPassword = await hashPassword(password)
 
-        const newUser = await createUser({ username, password: hashedPassword })
+        await createUser({ username, password: hashedPassword })
 
-        const success = await loginHandler(username, password)
-
-        if (success) {
-            redirectToHome = true
-        }
+        redirectToHome = (await loginHandler(username, password)) || false
     } catch (error) {
         console.error('Something went wrong while registering: ', error)
         throw error
