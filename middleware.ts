@@ -3,7 +3,6 @@ import type { NextRequest } from 'next/server'
 import { verifySession } from './middlewares/verifySession'
 
 export async function middleware(request: NextRequest) {
-    console.log("Middleware called")
     if (request.nextUrl.pathname.startsWith('/home')) {
         const session = await verifySession()
 
